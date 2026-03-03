@@ -3,6 +3,8 @@ public class Activity1 extends IntegerManager implements PrintPretty {
         Activity1 thingy = new Activity1();
         thingy.buildList();
         thingy.printPretty();
+        thingy.shuffle();
+        thingy.printPretty();
     }
 
     @Override
@@ -17,9 +19,11 @@ public class Activity1 extends IntegerManager implements PrintPretty {
     }
 
     public void printPretty(){
+        System.out.print("[ ");
         for(int num : nums){
             System.out.print(num + " ");
         }
+        System.out.println("]");
     }
     
     @Override
@@ -27,6 +31,12 @@ public class Activity1 extends IntegerManager implements PrintPretty {
         //loop thru all nums, index i
         //pick random spot, r
         //3 part swap, r-> temp -> i
+        for(int i = 0; i < nums.length; i++){
+            int r = (int)(Math.random() * (20));
+            int temp = nums[i];
+            nums[i] = nums[r];
+            nums[r] = temp;
+        }
     }
     
     @Override
