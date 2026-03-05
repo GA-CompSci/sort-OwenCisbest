@@ -5,6 +5,12 @@ public class Activity1 extends IntegerManager implements PrintPretty {
         thingy.printPretty();
         thingy.shuffle();
         thingy.printPretty();
+        thingy.selectionSort();
+        thingy.printPretty();
+        thingy.shuffle();
+        thingy.insertionSort();
+        thingy.printPretty();
+        
     }
 
     @Override
@@ -41,10 +47,42 @@ public class Activity1 extends IntegerManager implements PrintPretty {
     
     @Override
     void insertionSort(){
+        for(int i = 0; i < nums.length; i++){
+            int outnum = nums[i];
+            for(int k = nums.length - 1; k > 0; k--){
+                int innum = nums[k];
+                if(innum < outnum){
+                    int temp = outnum;
+                    nums[i] = innum;
+                    nums[k] = temp;
+                }
+            }
+        }
     }
 
+    void selectionSort(boolean highToLow){
+        if(!highToLow) selectionSort();
+    }
+    
     @Override
     void selectionSort(){
+
+        //outer loop
+        for(int i = 0; i < nums.length; i++){
+        //find da smol
+            int smolspot = i;
+            int smol = nums[i];
+            for(int k = i + 1; k < nums.length; k++){
+                if(nums[k] < smol){
+                    smol = nums[k];
+                    smolspot = k;
+                }
+            }
+        //three part swap cuz good
+        int temp = nums[i];
+        nums[i] = nums[smolspot];
+        nums[smolspot] = temp;
+        }
     }
 
     @Override
