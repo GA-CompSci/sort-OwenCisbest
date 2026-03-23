@@ -10,6 +10,9 @@ public class Activity1 extends IntegerManager implements PrintPretty {
         thingy.shuffle();
         thingy.insertionSort();
         thingy.printPretty();
+        thingy.shuffle();
+        thingy.insertionSort(true);
+        thingy.printPretty();
         
     }
 
@@ -25,6 +28,7 @@ public class Activity1 extends IntegerManager implements PrintPretty {
     }
 
     public void printPretty(){
+        String name;
         System.out.print("[ ");
         for(int num : nums){
             System.out.print(num + " ");
@@ -47,16 +51,32 @@ public class Activity1 extends IntegerManager implements PrintPretty {
     
     @Override
     void insertionSort(){
-        for(int i = 0; i < nums.length; i++){
-            int outnum = nums[i];
-            for(int k = nums.length - 1; k > 0; k--){
-                int innum = nums[k];
-                if(innum < outnum){
-                    int temp = outnum;
-                    nums[i] = innum;
-                    nums[k] = temp;
-                }
+
+        for(int i = 1; i < nums.length; i++){
+            int abcdefghijklnmopqrstuvwxyz = nums[i];
+            int j = i - 1;
+            while(j > -1 && nums[j] > abcdefghijklnmopqrstuvwxyz){
+                nums[j+1] = nums[j];
+                j--;
             }
+            nums[j+1] = abcdefghijklnmopqrstuvwxyz;
+        }
+        System.out.println("Insertion Sort");
+    }
+
+    void insertionSort(boolean highToLow){
+        if(!highToLow) insertionSort();
+        else{
+            for(int i = 1; i < nums.length; i++){
+                int temp = nums[i];
+                int j = i - 1;
+                while(j > -1 && nums[j] < temp){
+                    nums[j+1] = nums[j];
+                    j--;
+                }
+                nums[j+1] = temp;
+            }
+            System.out.println("Insertion Sort High to Low");
         }
     }
 
@@ -83,6 +103,7 @@ public class Activity1 extends IntegerManager implements PrintPretty {
         nums[i] = nums[smolspot];
         nums[smolspot] = temp;
         }
+        System.out.println("Selection Sort");
     }
 
     @Override
