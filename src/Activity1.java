@@ -13,6 +13,7 @@ public class Activity1 extends IntegerManager implements PrintPretty {
         thingy.shuffle();
         thingy.insertionSort(true);
         thingy.printPretty();
+        thingy.pickRandom();
         
     }
 
@@ -112,6 +113,26 @@ public class Activity1 extends IntegerManager implements PrintPretty {
 
     @Override
     int pickRandom(){
-        return 0;
+        int i = (int)(Math.random() * nums.length);
+        int pickednum = nums[i];
+        System.out.println("The picked number was" + pickednum);
+        return pickednum;
+    }
+
+    int binarySearch(int something){
+        //start in da middle
+        int low = 0;
+        int high = nums.length - 1;
+
+        while(low <= high){
+            int middle = (low + high)/2;
+            if(nums[middle] == something) return middle;
+
+            else if(nums[middle] > something) high = middle - 1;
+            
+            else low = middle + 1;
+        }
+        //if what im looking for is unfound
+        return -1;
     }
 }
