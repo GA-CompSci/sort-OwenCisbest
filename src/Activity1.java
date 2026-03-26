@@ -13,6 +13,12 @@ public class Activity1 extends IntegerManager implements PrintPretty {
         thingy.shuffle();
         thingy.insertionSort(true);
         thingy.printPretty();
+        thingy.shuffle();
+        thingy.insertionSort();
+        thingy.printPretty();
+        int binarynum = 21;
+        int result = thingy.binarySearch(binarynum);
+        System.out.println("Binary Search result for "+ binarynum + ": " + result);
         thingy.pickRandom();
         
     }
@@ -52,15 +58,18 @@ public class Activity1 extends IntegerManager implements PrintPretty {
     
     @Override
     void insertionSort(){
-
+        int passnum = 0;
         for(int i = 1; i < nums.length; i++){
-            int abcdefghijklnmopqrstuvwxyz = nums[i];
+            int temp = nums[i];
             int j = i - 1;
-            while(j > -1 && nums[j] > abcdefghijklnmopqrstuvwxyz){
+            while(j > -1 && nums[j] > temp){
                 nums[j+1] = nums[j];
                 j--;
             }
-            nums[j+1] = abcdefghijklnmopqrstuvwxyz;
+            nums[j+1] = temp;
+            passnum++;
+            System.out.println("Insertion Sort: Pass #" + passnum);
+            printPretty();
         }
         System.out.println("Insertion Sort");
     }
@@ -88,6 +97,7 @@ public class Activity1 extends IntegerManager implements PrintPretty {
     @Override
     void selectionSort(){
 
+        int passnum = 0;
         //outer loop
         for(int i = 0; i < nums.length; i++){
         //find da smol
@@ -103,7 +113,12 @@ public class Activity1 extends IntegerManager implements PrintPretty {
         int temp = nums[i];
         nums[i] = nums[smolspot];
         nums[smolspot] = temp;
+
+        passnum++;
+        System.out.println("Selection Sort: Pass #" + passnum);
+        printPretty();
         }
+
         System.out.println("Selection Sort");
     }
 
