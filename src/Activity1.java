@@ -20,6 +20,9 @@ public class Activity1 extends IntegerManager implements PrintPretty {
         int result = thingy.binarySearch(binarynum);
         System.out.println("Binary Search result for "+ binarynum + ": " + result);
         thingy.pickRandom();
+        thingy.shuffle();
+        thingy.mergeSort(thingy.nums);
+        thingy.printPretty();
         
     }
 
@@ -58,7 +61,6 @@ public class Activity1 extends IntegerManager implements PrintPretty {
     
     @Override
     void insertionSort(){
-        int passnum = 0;
         for(int i = 1; i < nums.length; i++){
             int temp = nums[i];
             int j = i - 1;
@@ -67,9 +69,6 @@ public class Activity1 extends IntegerManager implements PrintPretty {
                 j--;
             }
             nums[j+1] = temp;
-            passnum++;
-            System.out.println("Insertion Sort: Pass #" + passnum);
-            printPretty();
         }
         System.out.println("Insertion Sort");
     }
@@ -92,6 +91,25 @@ public class Activity1 extends IntegerManager implements PrintPretty {
 
     void selectionSort(boolean highToLow){
         if(!highToLow) selectionSort();
+        else{
+            int passnum = 0;
+            for(int i = 0; i < nums.length; i++){
+                int bigspot = i;
+                int big = nums[i];
+                for(int k = i + 1; k < nums.length; k++){
+                    if(nums[k] > big){
+                        big = nums[k];
+                        bigspot = k;
+                    }
+                }
+                int temp = nums[i];
+                nums[i] = nums[bigspot];
+                nums[bigspot] = temp;
+                
+                passnum++;
+            }
+            System.out.println("Selection Sort High to Low");
+        }
     }
     
     @Override
@@ -114,16 +132,46 @@ public class Activity1 extends IntegerManager implements PrintPretty {
         nums[i] = nums[smolspot];
         nums[smolspot] = temp;
 
-        passnum++;
-        System.out.println("Selection Sort: Pass #" + passnum);
-        printPretty();
         }
 
         System.out.println("Selection Sort");
     }
 
     @Override
-    void mergeSort(){
+    void mergeSort(int[] nums){
+        int n = nums.length;
+        if(nums.length <= 1) return;
+        int mid = nums.length/2;
+        int[] l = new int[mid];
+        int[] r = new int[nums.length - mid];
+        for(int i = 0; i < mid; i++){
+            l[i] = nums[i];
+        }
+        for(int i = mid; i < n; i++){
+            r[i-mid] = nums[i];
+        }
+        mergeSort(l);
+        mergeSort(r);
+
+        merge(nums, l, r, mid, n-mid);
+    }
+
+    void merge(int[] nums, int[] l, int[] r, int left, int right){
+        int i = 0, j = 0, k = 0;
+        while(i < left && j < right){
+            if(l[i] <= r[j]){
+                nums[k++] = l[i++];
+            }
+            else{
+                nums[k++] = r[j++];
+            }
+        }
+        while(i < left){
+            nums[k++] = l[i++];
+        }
+        while(j < right){
+            nums[k++] = r[j++];
+        }
     }
 
     @Override
